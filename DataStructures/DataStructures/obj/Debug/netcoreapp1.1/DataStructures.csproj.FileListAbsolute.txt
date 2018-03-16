@@ -1,0 +1,11 @@
+C:\Users\tbauer516\Desktop\dev\CSharp\DataStructures\DataStructures\bin\Debug\netcoreapp1.1\DataStructures.deps.json
+C:\Users\tbauer516\Desktop\dev\CSharp\DataStructures\DataStructures\bin\Debug\netcoreapp1.1\DataStructures.runtimeconfig.json
+C:\Users\tbauer516\Desktop\dev\CSharp\DataStructures\DataStructures\bin\Debug\netcoreapp1.1\DataStructures.runtimeconfig.dev.json
+C:\Users\tbauer516\Desktop\dev\CSharp\DataStructures\DataStructures\bin\Debug\netcoreapp1.1\DataStructures.dll
+C:\Users\tbauer516\Desktop\dev\CSharp\DataStructures\DataStructures\bin\Debug\netcoreapp1.1\DataStructures.pdb
+C:\Users\tbauer516\Desktop\dev\CSharp\DataStructures\DataStructures\obj\Debug\netcoreapp1.1\DataStructures.csprojResolveAssemblyReference.cache
+C:\Users\tbauer516\Desktop\dev\CSharp\DataStructures\DataStructures\obj\Debug\netcoreapp1.1\DataStructures.csproj.CoreCompileInputs.cache
+C:\Users\tbauer516\Desktop\dev\CSharp\DataStructures\DataStructures\obj\Debug\netcoreapp1.1\DataStructures.AssemblyInfoInputs.cache
+C:\Users\tbauer516\Desktop\dev\CSharp\DataStructures\DataStructures\obj\Debug\netcoreapp1.1\DataStructures.AssemblyInfo.cs
+C:\Users\tbauer516\Desktop\dev\CSharp\DataStructures\DataStructures\obj\Debug\netcoreapp1.1\DataStructures.dll
+C:\Users\tbauer516\Desktop\dev\CSharp\DataStructures\DataStructures\obj\Debug\netcoreapp1.1\DataStructures.pdb
