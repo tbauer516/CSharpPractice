@@ -60,64 +60,82 @@ namespace DataStructures.Tree
         public void Remove(T val)
         {
             var parent = FindParent(val);
-            if (parent == null || !parent.HasChild(val))
+
+            // Tree has no nodes
+            if (parent == null)
                 return;
 
-            var child = parent.Left;
-            var isLeftChild = true;
-            if (parent.Right != null && parent.Right.Value.Equals(val))
+            // Child is either:
+            //      == to parent if val == Root
+            //      left or right child of parent otherwise
+            var child = parent;
+            bool? isLeft = null;
+            if (parent.Left != null && parent.Left.Value.Equals(val))
+            {
+                child = parent.Left;
+                isLeft = true;
+            }
+            else if (parent.Right != null && parent.Right.Value.Equals(val))
             {
                 child = parent.Right;
-                isLeftChild = false;
+                isLeft = false;
             }
 
-            // TODO: implement the 2 child scenario
-            // Node has 2 children
-            if (child.Left != null && child.Right != null)
+            // if child == parent and doesn't equal val, then the val doesn't exist
+            if (!child.Value.Equals(val))
+                return;
+
+            // alias for child, to make more logical sense
+            var toRemove = child;
+
+            // replaceParent either null, if toRemove.Right == null
+            // or toRemove.Right if toRemove.Right has no left child
+            // or left most child of toRemove.Right
+            var replaceParent = FindSmallestParent(toRemove.Right);
+            var replace = replaceParent;
+
+            // either one right child, or two children
+            if (replaceParent != null)
             {
-                var replaceParent = FindSmallestParent(child.Right);
-                if (replaceParent.Value.Equals(child.Right.Value))
+                // there is an actual parent that has a left child
+                if (replaceParent.Left != null)
                 {
-                    // Do same as when only 1 right child
-                    if (isLeftChild)
-                        parent.Left = child.Right;
-                    else
-                        parent.Right = child.Right;
-                    return;
+                    replace = replaceParent.Left;
+                    replaceParent.Left = replace.Right;
                 }
+                // otherwise the parent and child are the same
+            }
+            else
+            {
+                // there is no right child to promote, so we need to do the left
+                // only happens if one left child exists
+                replace = toRemove.Left;
             }
 
-            // Node has 1 left child
-            if (child.Left != null && child.Right == null)
+            // set the parent's child
+            if (isLeft == null)
+                this.Root = replace;
+            else if ((bool) isLeft)
+                parent.Left = replace;
+            else
+                parent.Right = replace;
+
+            // if node is not a leaf, we need to make sure all the children are preserved
+            if (replace != null)
             {
-                if (isLeftChild)
-                    parent.Left = child.Left;
-                else
-                    parent.Right = child.Left;
-                return;
+                replace.Right = toRemove.Right;
+                if (toRemove.Left != null && !toRemove.Left.Value.Equals(replace.Value))
+                    replace.Left = toRemove.Left;
             }
 
-            // Node has 1 right child
-            if (child.Left == null && child.Right != null)
-            {
-                if (isLeftChild)
-                    parent.Left = child.Right;
-                else
-                    parent.Right = child.Right;
-                return;
-            }
-
-            // Node has 0 children
-            if (child.IsLeaf())
-            {
-                if (isLeftChild)
-                    parent.Left = null;
-                else
-                    parent.Right = null;
-                return;
-            }
+            // if we reach here, the remove was successful and we decrement the stored size
+            this.Size--;
         }
 
+        // returns:
+        //  null:   search is null
+        //  search: when search has no left children
+        //  BTNode: furthest left child of search otherwise
         private BTNode<T> FindSmallestParent(BTNode<T> search)
         {
             var current = search;
@@ -134,6 +152,7 @@ namespace DataStructures.Tree
         // returns the parent of the node of the value being searched for
         // returns:
         //      null:   when Root is null
+        //      Root:   when the value searched is the Root
         //      BTNode: when parent where child is found OR would be found if it existed
         // **NOTE: does not provide info on whether the value exists or not
         private BTNode<T> FindParent(T val)
@@ -151,7 +170,7 @@ namespace DataStructures.Tree
                     nextChild = current.Right;
                 }
 
-                if (nextChild == null)
+                if (nextChild == null || nextChild.Value.Equals(val))
                     return current;
 
                 current = nextChild;

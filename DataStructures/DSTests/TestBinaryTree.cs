@@ -1,5 +1,7 @@
 ﻿using NUnit.Framework;
 using DataStructures.Tree;
+using System.Collections.Generic;
+using System;
 
 namespace DSTests
 {
@@ -25,15 +27,15 @@ namespace DSTests
         {
             var testTree = new BinaryTree<int>();
             var initialSize = testTree.Size;
-            Assert.AreEqual(initialSize, 0);
+            Assert.AreEqual(0, initialSize);
 
             testTree.Insert(4);
             var oneSize = testTree.Size;
-            Assert.AreEqual(oneSize, 1);
+            Assert.AreEqual(1, oneSize);
 
             testTree.Insert(2);
             var twoSize = testTree.Size;
-            Assert.AreEqual(twoSize, 2);
+            Assert.AreEqual(2, twoSize);
         }
 
         [Test]
@@ -41,33 +43,69 @@ namespace DSTests
         {
             var testTree = new BinaryTree<int>();
             var hasOne = testTree.Contains(1);
-            Assert.AreEqual(hasOne, false);
+            Assert.AreEqual(false, hasOne);
 
             testTree.Insert(1);
             var hasOneAfterInsert = testTree.Contains(1);
-            Assert.AreEqual(hasOneAfterInsert, true);
+            Assert.AreEqual(true, hasOneAfterInsert);
+        }
+
+        [Test]
+        public void TestRemoveRoot()
+        {
+            var testTree = new BinaryTree<int>();
+            var initialSize = testTree.Size;
+            var initialContains = testTree.Contains(4);
+            Assert.AreEqual(0, initialSize);
+            Assert.AreEqual(false, initialContains);
+
+            testTree.Insert(4);
+            var oneSize = testTree.Size;
+            var fourContains = testTree.Contains(4);
+            Assert.AreEqual(1, oneSize);
+            Assert.AreEqual(true, fourContains);
+
+            testTree.Remove(4);
+            var twoSize = testTree.Size;
+            var fourContainsAfterRemove = testTree.Contains(4);
+            Assert.AreEqual(0, twoSize);
+            Assert.AreEqual(false, fourContainsAfterRemove);
         }
 
         [Test]
         public void TestRemove()
         {
-            var testTree = new BinaryTree<int>();
+            var testTree = SetupTree();
             var initialSize = testTree.Size;
-            var initialContains = testTree.Contains(1);
-            Assert.AreEqual(initialSize, 0);
-            Assert.AreEqual(initialContains, false);
 
-            testTree.Insert(4);
-            var oneSize = testTree.Size;
-            var fourContains = testTree.Contains(4);
-            Assert.AreEqual(oneSize, 1);
-            Assert.AreEqual(fourContains, true);
+            testTree.Remove(3);
+            var newSize = testTree.Size;
+            var newContains = testTree.Contains(3);
+            Assert.AreEqual(initialSize - 1, newSize);
+            Assert.AreEqual(false, newContains);
+        }
 
-            testTree.Remove(4);
-            var twoSize = testTree.Size;
-            var fourContainsAfterRemove = testTree.Contains(4);
-            Assert.AreEqual(twoSize, 0);
-            Assert.AreEqual(fourContainsAfterRemove, false);
+        [Test]
+        public void TestRemoveStress()
+        {
+            var testTree = SetupTree();
+            var initialSize = testTree.Size;
+
+            var valueList = new List<int>();
+            for (int i = 1; i <= 7; i++)
+            {
+                valueList.Add(i);
+            }
+
+            var rand = new Random();
+            for (int i = 0; i < initialSize; i++)
+            {
+                var num = rand.Next(1, initialSize + 1);
+                testTree.Remove(num);
+                valueList.Remove(num);
+                var actual = testTree.InOrder();
+                Assert.AreEqual(valueList, actual);
+            }
         }
 
         [Test]
@@ -76,8 +114,8 @@ namespace DSTests
             var testTree = SetupTree();
             var result = testTree.InOrder();
 
-            var expected = new System.Collections.Generic.List<int>();
-            for (var i = 1; i < 8; i++)
+            var expected = new List<int>();
+            for (var i = 1; i <= 7; i++)
             {
                 expected.Add(i);
             }
