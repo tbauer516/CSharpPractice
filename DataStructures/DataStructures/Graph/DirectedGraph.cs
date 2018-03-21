@@ -1,14 +1,13 @@
-﻿using System.Collections.Generic;
-
-namespace DataStructures.Graph
+﻿namespace DataStructures.Graph
 {
     public class DirectedGraph<T>
     {
-        public HashSet<T> Nodes;
+        private EdgeStructure<T> _edges;
         
         public DirectedGraph()
         {
-            this.Nodes = new HashSet<T>();
+            _edges = new EdgeList<T>();
         }
+        
     }
 }

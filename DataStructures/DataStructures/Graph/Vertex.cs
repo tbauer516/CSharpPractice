@@ -1,10 +1,10 @@
 ﻿namespace DataStructures.Graph
 {
-    public class GraphNode<T>
+    public class Vertex<T>
     {
         private T Value;
 
-        public GraphNode(T val)
+        public Vertex(T val)
         {
             this.Value = val;
         }
