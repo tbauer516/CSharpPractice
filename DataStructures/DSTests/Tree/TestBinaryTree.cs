@@ -86,29 +86,6 @@ namespace DSTests
         }
 
         [Test]
-        public void TestRemoveStress()
-        {
-            var testTree = SetupTree();
-            var initialSize = testTree.Size;
-
-            var valueList = new List<int>();
-            for (int i = 1; i <= 7; i++)
-            {
-                valueList.Add(i);
-            }
-
-            var rand = new Random();
-            for (int i = 0; i < initialSize; i++)
-            {
-                var num = rand.Next(1, initialSize + 1);
-                testTree.Remove(num);
-                valueList.Remove(num);
-                var actual = testTree.InOrder();
-                Assert.AreEqual(valueList, actual);
-            }
-        }
-
-        [Test]
         public void TestInOrder()
         {
             var testTree = SetupTree();
