@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
+using DataStructures.Graph.Vertex;
 
-namespace DataStructures.Graph
+namespace DataStructures.Graph.Edge
 {
-    public class EdgeList<T> : EdgeStructure<T>
+    public class EdgeList<T> : IEdgeStructure<T>
     {
         private readonly Dictionary<Vertex<T>, LinkedList<Vertex<T>>> _edges;
 

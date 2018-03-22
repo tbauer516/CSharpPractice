@@ -1,13 +1,14 @@
 ﻿using System.Collections.Generic;
+using DataStructures.Graph.Vertex;
 
 namespace DataStructures.Graph
 {
-    public interface EdgeStructure<T>
+    public interface IGraph<T>
     {
         void AddVertex(Vertex<T> source);
         void RemoveVertex(Vertex<T> source);
         bool ContainsVertex(Vertex<T> source);
-        
+
         void AddEdge(Vertex<T> source, Vertex<T> dest);
         void RemoveEdge(Vertex<T> source, Vertex<T> dest);
         bool ContainsEdge(Vertex<T> source, Vertex<T> dest);

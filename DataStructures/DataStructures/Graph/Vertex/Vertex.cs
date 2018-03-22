@@ -1,4 +1,4 @@
-﻿namespace DataStructures.Graph
+﻿namespace DataStructures.Graph.Vertex
 {
     public class Vertex<T>
     {

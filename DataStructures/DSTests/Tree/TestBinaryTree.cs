@@ -3,7 +3,7 @@ using DataStructures.Tree;
 using System.Collections.Generic;
 using System;
 
-namespace DSTests
+namespace DSTests.Tree
 {
     [TestFixture]
     class TestBinaryTree
