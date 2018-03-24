@@ -2,7 +2,7 @@
 using DataStructures.Graph;
 using System.Collections.Generic;
 using DataStructures.Graph.Search;
-using DataStructures.Graph.Vertex;
+using DataStructures.Graph;
 
 namespace DSTests.Graph
 {
@@ -15,12 +15,12 @@ namespace DSTests.Graph
         {
             var graph = new DirectedGraph<string>();
 
-            var v1 = new Vertex<string>("One");
-            var v2 = new Vertex<string>("Two");
-            var v3 = new Vertex<string>("Three");
-            var v4 = new Vertex<string>("Four");
-            var v5 = new Vertex<string>("Five");
-            var v6 = new Vertex<string>("Six");
+            var v1 = "One";
+            var v2 = "Two";
+            var v3 = "Three";
+            var v4 = "Four";
+            var v5 = "Five";
+            var v6 = "Six";
 
             graph.AddVertex(v1);
             graph.AddVertex(v2);
@@ -61,7 +61,7 @@ namespace DSTests.Graph
         {
             var graph = new DirectedGraph<string>();
 
-            var v1 = new Vertex<string>("One");
+            var v1 = "One";
             var actual1 = graph.ContainsVertex(v1);
             Assert.AreEqual(false, actual1);
 
@@ -75,7 +75,7 @@ namespace DSTests.Graph
         {
             var graph = new DirectedGraph<string>();
 
-            var v1 = new Vertex<string>("One");
+            var v1 = "One";
             graph.AddVertex(v1);
             var actual1 = graph.ContainsVertex(v1);
             Assert.AreEqual(true, actual1);
@@ -90,8 +90,8 @@ namespace DSTests.Graph
         {
             var graph = new DirectedGraph<string>();
 
-            var v1 = new Vertex<string>("One");
-            var v2 = new Vertex<string>("Two");
+            var v1 = "One";
+            var v2 = "Two";
             var actual1 = graph.ContainsEdge(v1, v2);
             Assert.AreEqual(false, actual1);
 
@@ -105,8 +105,8 @@ namespace DSTests.Graph
         {
             var graph = new DirectedGraph<string>();
 
-            var v1 = new Vertex<string>("One");
-            var v2 = new Vertex<string>("Two");
+            var v1 = "One";
+            var v2 = "Two";
             graph.AddEdge(v1, v2);
             var actual1 = graph.ContainsEdge(v1, v2);
             Assert.AreEqual(true, actual1);
@@ -121,11 +121,11 @@ namespace DSTests.Graph
         {
             var graph = new DirectedGraph<string>();
 
-            var v1 = new Vertex<string>("One");
-            var v2 = new Vertex<string>("Two");
-            var v3 = new Vertex<string>("Three");
-            var v4 = new Vertex<string>("Four");
-            var v5 = new Vertex<string>("Five");
+            var v1 = "One";
+            var v2 = "Two";
+            var v3 = "Three";
+            var v4 = "Four";
+            var v5 = "Five";
 
             graph.AddVertex(v1);
             graph.AddVertex(v2);
@@ -138,7 +138,7 @@ namespace DSTests.Graph
             graph.AddEdge(v2, v4);
             graph.AddEdge(v3, v5);
 
-            var expected = new LinkedList<Vertex<string>>();
+            var expected = new LinkedList<string>();
             expected.AddLast(v1);
             expected.AddLast(v3);
             expected.AddLast(v5);
@@ -153,11 +153,11 @@ namespace DSTests.Graph
         {
             var graph = new DirectedGraph<string>();
 
-            var v1 = new Vertex<string>("One");
-            var v2 = new Vertex<string>("Two");
-            var v3 = new Vertex<string>("Three");
-            var v4 = new Vertex<string>("Four");
-            var v5 = new Vertex<string>("Five");
+            var v1 = "One";
+            var v2 = "Two";
+            var v3 = "Three";
+            var v4 = "Four";
+            var v5 = "Five";
 
             graph.AddVertex(v1);
             graph.AddVertex(v2);
@@ -171,7 +171,7 @@ namespace DSTests.Graph
             graph.AddEdge(v3, v5);
             graph.AddEdge(v4, v5);
 
-            var expected = new LinkedList<Vertex<string>>();
+            var expected = new LinkedList<string>();
             expected.AddLast(v1);
             expected.AddLast(v3);
             expected.AddLast(v5);
@@ -186,11 +186,11 @@ namespace DSTests.Graph
         {
             var graph = new DirectedGraph<string>();
 
-            var v1 = new Vertex<string>("One");
-            var v2 = new Vertex<string>("Two");
-            var v3 = new Vertex<string>("Three");
-            var v4 = new Vertex<string>("Four");
-            var v5 = new Vertex<string>("Five");
+            var v1 = "One";
+            var v2 = "Two";
+            var v3 = "Three";
+            var v4 = "Four";
+            var v5 = "Five";
 
             graph.AddVertex(v1);
             graph.AddVertex(v2);
@@ -206,7 +206,7 @@ namespace DSTests.Graph
             graph.AddEdge(v3, v5);
             graph.AddEdge(v5, v1);
 
-            var expected = new LinkedList<Vertex<string>>();
+            var expected = new LinkedList<string>();
             expected.AddLast(v1);
             expected.AddLast(v3);
             expected.AddLast(v5);
@@ -221,11 +221,11 @@ namespace DSTests.Graph
         {
             var graph = new DirectedGraph<string>();
 
-            var v1 = new Vertex<string>("One");
-            var v2 = new Vertex<string>("Two");
-            var v3 = new Vertex<string>("Three");
-            var v4 = new Vertex<string>("Four");
-            var v5 = new Vertex<string>("Five");
+            var v1 = "One";
+            var v2 = "Two";
+            var v3 = "Three";
+            var v4 = "Four";
+            var v5 = "Five";
 
             graph.AddVertex(v1);
             graph.AddVertex(v2);
@@ -238,7 +238,7 @@ namespace DSTests.Graph
             graph.AddEdge(v2, v4);
             graph.AddEdge(v3, v5);
 
-            var expected = new LinkedList<Vertex<string>>();
+            var expected = new LinkedList<string>();
 
             var actual = BreadthFirstSearch<string>.Search(graph, v1, v5);
 
@@ -250,11 +250,11 @@ namespace DSTests.Graph
         {
             var graph = new DirectedGraph<string>();
 
-            var v1 = new Vertex<string>("One");
-            var v2 = new Vertex<string>("Two");
-            var v3 = new Vertex<string>("Three");
-            var v4 = new Vertex<string>("Four");
-            var v5 = new Vertex<string>("Five");
+            var v1 = "One";
+            var v2 = "Two";
+            var v3 = "Three";
+            var v4 = "Four";
+            var v5 = "Five";
 
             graph.AddVertex(v1);
             graph.AddVertex(v2);
@@ -267,7 +267,7 @@ namespace DSTests.Graph
             graph.AddEdge(v2, v4);
             graph.AddEdge(v3, v5);
 
-            var expected = new LinkedList<Vertex<string>>();
+            var expected = new LinkedList<string>();
             expected.AddLast(v1);
             expected.AddLast(v3);
             expected.AddLast(v5);
@@ -282,11 +282,11 @@ namespace DSTests.Graph
         {
             var graph = new DirectedGraph<string>();
 
-            var v1 = new Vertex<string>("One");
-            var v2 = new Vertex<string>("Two");
-            var v3 = new Vertex<string>("Three");
-            var v4 = new Vertex<string>("Four");
-            var v5 = new Vertex<string>("Five");
+            var v1 = "One";
+            var v2 = "Two";
+            var v3 = "Three";
+            var v4 = "Four";
+            var v5 = "Five";
 
             graph.AddVertex(v1);
             graph.AddVertex(v2);
@@ -302,7 +302,7 @@ namespace DSTests.Graph
             graph.AddEdge(v3, v5);
             graph.AddEdge(v5, v1);
 
-            var expected = new LinkedList<Vertex<string>>();
+            var expected = new LinkedList<string>();
             expected.AddLast(v1);
             expected.AddLast(v3);
             expected.AddLast(v5);
@@ -317,11 +317,11 @@ namespace DSTests.Graph
         {
             var graph = new DirectedGraph<string>();
 
-            var v1 = new Vertex<string>("One");
-            var v2 = new Vertex<string>("Two");
-            var v3 = new Vertex<string>("Three");
-            var v4 = new Vertex<string>("Four");
-            var v5 = new Vertex<string>("Five");
+            var v1 = "One";
+            var v2 = "Two";
+            var v3 = "Three";
+            var v4 = "Four";
+            var v5 = "Five";
 
             graph.AddVertex(v1);
             graph.AddVertex(v2);
@@ -334,7 +334,7 @@ namespace DSTests.Graph
             graph.AddEdge(v2, v4);
             graph.AddEdge(v3, v5);
 
-            var expected = new LinkedList<Vertex<string>>();
+            var expected = new LinkedList<string>();
 
             var actual = DepthFirstSearch<string>.Search(graph, v1, v5);
 

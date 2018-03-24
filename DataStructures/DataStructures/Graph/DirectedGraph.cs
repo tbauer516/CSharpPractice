@@ -10,7 +10,7 @@ namespace DataStructures.Graph
         
         public DirectedGraph()
         {
-            _edges = new EdgeList<T>();
+            _edges = new WeightedEdgeList<T>();
         }
         
         public DirectedGraph(IEdgeStructure<T> edges)
@@ -18,14 +18,14 @@ namespace DataStructures.Graph
             _edges = edges;
         }
 
-        public void AddVertex(Vertex<T> source) { _edges.AddVertex(source); }
-        public void RemoveVertex(Vertex<T> source) { _edges.RemoveVertex(source); }
-        public bool ContainsVertex(Vertex<T> source) { return _edges.ContainsVertex(source); }
+        public void AddVertex(T source) { _edges.AddVertex(source); }
+        public void RemoveVertex(T source) { _edges.RemoveVertex(source); }
+        public bool ContainsVertex(T source) { return _edges.ContainsVertex(source); }
 
-        public void AddEdge(Vertex<T> source, Vertex<T> dest) { _edges.AddEdge(source, dest); }
-        public void RemoveEdge(Vertex<T> source, Vertex<T> dest) { _edges.RemoveEdge(source, dest); }
-        public bool ContainsEdge(Vertex<T> source, Vertex<T> dest) { return _edges.ContainsEdge(source, dest); }
-        public IList<Vertex<T>> OutEdges(Vertex<T> source) { return _edges.OutEdges(source); }
-        public IList<Vertex<T>> InEdges(Vertex<T> source) { return _edges.InEdges(source); }
+        public void AddEdge(T source, T dest) { _edges.AddEdge(source, dest); }
+        public void RemoveEdge(T source, T dest) { _edges.RemoveEdge(source, dest); }
+        public bool ContainsEdge(T source, T dest) { return _edges.ContainsEdge(source, dest); }
+        public IList<T> OutEdges(T source) { return _edges.OutEdges(source); }
+        public IList<T> InEdges(T source) { return _edges.InEdges(source); }
     }
 }

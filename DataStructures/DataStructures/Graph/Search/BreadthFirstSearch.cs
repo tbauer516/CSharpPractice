@@ -5,12 +5,12 @@ namespace DataStructures.Graph.Search
 {
     public static class BreadthFirstSearch<T>
     {
-        public static ICollection<Vertex<T>> Search(IGraph<T> graph, Vertex<T> source, Vertex<T> dest)
+        public static ICollection<T> Search(IGraph<T> graph, T source, T dest)
         {
-            var paths = new Dictionary<Vertex<T>, Vertex<T>>();
+            var paths = new Dictionary<T, T>();
 
-            var seen = new HashSet<Vertex<T>>();
-            var queue = new Queue<Vertex<T>>();
+            var seen = new HashSet<T>();
+            var queue = new Queue<T>();
             seen.Add(source);
             queue.Enqueue(source);
 
@@ -38,7 +38,7 @@ namespace DataStructures.Graph.Search
             }
 
             var nextV = dest;
-            var path = new LinkedList<Vertex<T>>();
+            var path = new LinkedList<T>();
             while (paths.ContainsKey(nextV) || nextV.Equals(source))
             {
                 path.AddFirst(nextV);
@@ -49,7 +49,7 @@ namespace DataStructures.Graph.Search
                 nextV = paths[nextV];
             }
 
-            return new LinkedList<Vertex<T>>();
+            return new LinkedList<T>();
         }        
     }
 }
