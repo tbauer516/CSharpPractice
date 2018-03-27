@@ -133,13 +133,28 @@ namespace DataStructures.Graph.Edge
             foreach (var vertex in _edges.Keys)
             {
                 pretty += vertex.ToString();
-                var indent = 0;
-                foreach (var edge in _edges[vertex])
+
+                var seen = new HashSet<T>();
+                var queue = new Queue<Tuple<T, int>>();
+
+                seen.Add(vertex);
+                queue.Enqueue(new Tuple<T, int>(vertex, 0));
+
+                while (queue.Count > 0)
                 {
-                    var pad = "";
-                    for (var i = 0; i < indent; i++)
+                    var currentTup = queue.Dequeue();
+                    var currentV = currentTup.Item1;
+                    var currentIndent = currentTup.Item2;
+
+                    var children = OutEdges(currentV);
+
+                    foreach (var child in children)
                     {
-                        pad += "---";
+                        if (seen.Contains(child))
+                            continue;
+
+                        queue.Enqueue(new Tuple<T, int>(child, currentIndent + 1));
+                        seen.Add(child);
                     }
                 }
             }

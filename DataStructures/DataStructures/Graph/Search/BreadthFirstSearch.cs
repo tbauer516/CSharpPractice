@@ -50,6 +50,6 @@ namespace DataStructures.Graph.Search
             }
 
             return new LinkedList<T>();
-        }        
+        }
     }
 }
