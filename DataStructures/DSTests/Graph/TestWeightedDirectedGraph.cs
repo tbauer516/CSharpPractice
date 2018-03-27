@@ -6,12 +6,12 @@ using DataStructures.Graph.Search;
 namespace DSTests.Graph
 {
     [TestFixture]
-    public class TestDirectedGraph
+    class TestWeightedDirectedGraph
     {
         [Test]
         public void TestVertexAdd()
         {
-            var graph = new DirectedGraph<string>();
+            var graph = new WeightedDirectedGraph<string>();
 
             var v1 = "One";
             var actual1 = graph.ContainsVertex(v1);
@@ -25,7 +25,7 @@ namespace DSTests.Graph
         [Test]
         public void TestVertexRemove()
         {
-            var graph = new DirectedGraph<string>();
+            var graph = new WeightedDirectedGraph<string>();
 
             var v1 = "One";
             graph.AddVertex(v1);
@@ -40,7 +40,7 @@ namespace DSTests.Graph
         [Test]
         public void TestEdgeAdd()
         {
-            var graph = new DirectedGraph<string>();
+            var graph = new WeightedDirectedGraph<string>();
 
             var v1 = "One";
             var v2 = "Two";
@@ -55,7 +55,7 @@ namespace DSTests.Graph
         [Test]
         public void TestEdgeRemove()
         {
-            var graph = new DirectedGraph<string>();
+            var graph = new WeightedDirectedGraph<string>();
 
             var v1 = "One";
             var v2 = "Two";
@@ -71,7 +71,7 @@ namespace DSTests.Graph
         [Test]
         public void TestBFSSuccess()
         {
-            var graph = new DirectedGraph<string>();
+            var graph = new WeightedDirectedGraph<string>();
 
             var v1 = "One";
             var v2 = "Two";
@@ -103,7 +103,7 @@ namespace DSTests.Graph
         [Test]
         public void TestBFSShortest()
         {
-            var graph = new DirectedGraph<string>();
+            var graph = new WeightedDirectedGraph<string>();
 
             var v1 = "One";
             var v2 = "Two";
@@ -136,7 +136,7 @@ namespace DSTests.Graph
         [Test]
         public void TestBFSLoop()
         {
-            var graph = new DirectedGraph<string>();
+            var graph = new WeightedDirectedGraph<string>();
 
             var v1 = "One";
             var v2 = "Two";
@@ -171,7 +171,7 @@ namespace DSTests.Graph
         [Test]
         public void TestBFSFail()
         {
-            var graph = new DirectedGraph<string>();
+            var graph = new WeightedDirectedGraph<string>();
 
             var v1 = "One";
             var v2 = "Two";
@@ -196,11 +196,11 @@ namespace DSTests.Graph
 
             Assert.AreEqual(expected, actual);
         }
-        
+
         [Test]
         public void TestDFSSuccess()
         {
-            var graph = new DirectedGraph<string>();
+            var graph = new WeightedDirectedGraph<string>();
 
             var v1 = "One";
             var v2 = "Two";
@@ -232,7 +232,7 @@ namespace DSTests.Graph
         [Test]
         public void TestDFSLoop()
         {
-            var graph = new DirectedGraph<string>();
+            var graph = new WeightedDirectedGraph<string>();
 
             var v1 = "One";
             var v2 = "Two";
@@ -267,7 +267,7 @@ namespace DSTests.Graph
         [Test]
         public void TestDFSFail()
         {
-            var graph = new DirectedGraph<string>();
+            var graph = new WeightedDirectedGraph<string>();
 
             var v1 = "One";
             var v2 = "Two";

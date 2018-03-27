@@ -1,12 +1,11 @@
 ﻿using System.Collections.Generic;
 using DataStructures.Graph.Edge;
-using DataStructures.Graph.Vertex;
 
 namespace DataStructures.Graph
 {
     public class DirectedGraph<T> : IGraph<T>
     {
-        private IEdgeStructure<T> _edges;
+        protected IEdgeStructure<T> _edges;
         
         public DirectedGraph()
         {

@@ -59,10 +59,16 @@ namespace DataStructures.Graph.Edge
                 return;
 
             var adjacencyList = _edges[source];
-            
+
+            Tuple<T, int> toRemove = null;
             foreach (var tup in adjacencyList)
                 if (tup.Item1.Equals(dest))
-                    adjacencyList.Remove(tup);
+                {
+                    toRemove = tup;
+                    break;
+                }
+
+            adjacencyList.Remove(toRemove);
         }
 
         private Tuple<T, int> GetEdge(T source, T dest)
@@ -117,6 +123,28 @@ namespace DataStructures.Graph.Edge
             }
 
             return inList;
+        }
+
+        // TODO: finish implementing
+        public string Print()
+        {
+            string pretty = "";
+
+            foreach (var vertex in _edges.Keys)
+            {
+                pretty += vertex.ToString();
+                var indent = 0;
+                foreach (var edge in _edges[vertex])
+                {
+                    var pad = "";
+                    for (var i = 0; i < indent; i++)
+                    {
+                        pad += "---";
+                    }
+                }
+            }
+
+            return pretty;
         }
     }
 }
