@@ -135,14 +135,14 @@ namespace DataStructures.Graph.Edge
                 pretty += vertex.ToString();
 
                 var seen = new HashSet<T>();
-                var queue = new Queue<Tuple<T, int>>();
+                var stack = new Stack<Tuple<T, int>>();
 
                 seen.Add(vertex);
-                queue.Enqueue(new Tuple<T, int>(vertex, 0));
+                stack.Push(new Tuple<T, int>(vertex, 0));
 
-                while (queue.Count > 0)
+                while (stack.Count > 0)
                 {
-                    var currentTup = queue.Dequeue();
+                    var currentTup = stack.Pop();
                     var currentV = currentTup.Item1;
                     var currentIndent = currentTup.Item2;
 
@@ -153,7 +153,7 @@ namespace DataStructures.Graph.Edge
                         if (seen.Contains(child))
                             continue;
 
-                        queue.Enqueue(new Tuple<T, int>(child, currentIndent + 1));
+                        stack.Push(new Tuple<T, int>(child, currentIndent + 1));
                         seen.Add(child);
                     }
                 }
