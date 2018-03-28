@@ -36,6 +36,9 @@ namespace DataStructures.Graph.Edge
 
         public void AddEdge(T source, T dest, int weight)
         {
+            if (weight < 0)
+                throw new ArgumentException("weight of: " + weight + " must be greater than zero");
+            
             if (!_edges.ContainsKey(source))
                 AddVertex(source);
 
@@ -125,7 +128,6 @@ namespace DataStructures.Graph.Edge
             return inList;
         }
 
-        // TODO: finish implementing
         public string Print()
         {
             string pretty = "";
@@ -133,10 +135,10 @@ namespace DataStructures.Graph.Edge
             foreach (var vertex in _edges.Keys)
             {
                 var seen = new HashSet<T>();
-                var stack = new Stack<Tuple<T, int>>();
+                var stack = new Stack<Tuple<T, int, int>>();
 
                 //seen.Add(vertex);
-                stack.Push(new Tuple<T, int>(vertex, 0));
+                stack.Push(new Tuple<T, int, int>(vertex, 0, 0));
 
                 pretty += "\n";
 
@@ -144,11 +146,15 @@ namespace DataStructures.Graph.Edge
                 {
                     var currentTup = stack.Pop();
                     var currentV = currentTup.Item1;
-                    var currentIndent = currentTup.Item2;
+                    var currentW = currentTup.Item2;
+                    var currentIndent = currentTup.Item3;
 
-                    var pad = String.Format("{0,-" + ((currentIndent > 0) ? ((currentIndent - 1) * 10) : 0) + "}", "");
+                    var pad = "";
                     if (currentIndent > 0)
-                        pad += String.Format("{0,-10}", "|---------");
+                    {
+                        pad = String.Format("{0,-" + (currentIndent - 1) * 10 + "}", "");
+                        pad += String.Format("{0,-10}", "  \\--" + currentW + "--");
+                    }
                     
                     pretty += pad + currentV.ToString() + "\n";
 
@@ -159,7 +165,7 @@ namespace DataStructures.Graph.Edge
                         if (seen.Contains(child))
                             continue;
 
-                        stack.Push(new Tuple<T, int>(child, currentIndent + 1));
+                        stack.Push(new Tuple<T, int, int>(child, EdgeWeight(currentV, child), currentIndent + 1));
                         seen.Add(child);
                     }
                 }
