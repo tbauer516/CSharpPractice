@@ -26,5 +26,7 @@ namespace DataStructures.Graph
         public bool ContainsEdge(T source, T dest) { return _edges.ContainsEdge(source, dest); }
         public IList<T> OutEdges(T source) { return _edges.OutEdges(source); }
         public IList<T> InEdges(T source) { return _edges.InEdges(source); }
+
+        public string Print() { return ((WeightedEdgeList<string>) _edges).Print(); }
     }
 }

@@ -132,19 +132,25 @@ namespace DataStructures.Graph.Edge
 
             foreach (var vertex in _edges.Keys)
             {
-                pretty += vertex.ToString();
-
                 var seen = new HashSet<T>();
                 var stack = new Stack<Tuple<T, int>>();
 
-                seen.Add(vertex);
+                //seen.Add(vertex);
                 stack.Push(new Tuple<T, int>(vertex, 0));
+
+                pretty += "\n";
 
                 while (stack.Count > 0)
                 {
                     var currentTup = stack.Pop();
                     var currentV = currentTup.Item1;
                     var currentIndent = currentTup.Item2;
+
+                    var pad = String.Format("{0,-" + ((currentIndent > 0) ? ((currentIndent - 1) * 10) : 0) + "}", "");
+                    if (currentIndent > 0)
+                        pad += String.Format("{0,-10}", "|---------");
+                    
+                    pretty += pad + currentV.ToString() + "\n";
 
                     var children = OutEdges(currentV);
 

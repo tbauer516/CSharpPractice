@@ -2,6 +2,7 @@
 using DataStructures.Graph;
 using System.Collections.Generic;
 using DataStructures.Graph.Search;
+using System;
 
 namespace DSTests.Graph
 {
@@ -291,6 +292,35 @@ namespace DSTests.Graph
             var actual = DepthFirstSearch<string>.Search(graph, v1, v5);
 
             Assert.AreEqual(expected, actual);
+        }
+
+        [Test]
+        public void TestPrint()
+        {
+            var graph = new DirectedGraph<string>();
+
+            var v1 = "One";
+            var v2 = "Two";
+            var v3 = "Three";
+            var v4 = "Four";
+            var v5 = "Five";
+
+            graph.AddVertex(v1);
+            graph.AddVertex(v2);
+            graph.AddVertex(v3);
+            graph.AddVertex(v4);
+            graph.AddVertex(v5);
+
+            graph.AddEdge(v1, v2);
+
+            graph.AddEdge(v2, v4);
+            graph.AddEdge(v3, v2);
+            graph.AddEdge(v3, v4);
+            graph.AddEdge(v3, v5);
+            graph.AddEdge(v4, v1);
+            graph.AddEdge(v5, v3);
+
+            Console.WriteLine(graph.Print());
         }
     }
 }
