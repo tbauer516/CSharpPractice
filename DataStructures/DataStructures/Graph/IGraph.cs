@@ -4,8 +4,8 @@ namespace DataStructures.Graph
 {
     public interface IGraph<T>
     {
-        void AddVertex(T source);
-        void RemoveVertex(T source);
+        T AddVertex(T source);
+        T RemoveVertex(T source);
         bool ContainsVertex(T source);
         ICollection<T> Vertices();
         

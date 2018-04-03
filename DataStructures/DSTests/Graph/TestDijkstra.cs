@@ -12,24 +12,15 @@ namespace DSTests.Graph
         public void TestSearch1()
         {
             var graph = new WeightedDirectedGraph<string>();
-
-            var a = "A";
-            var b = "B";
-            var c = "C";
-            var d = "D";
-            var e = "E";
-            var f = "F";
-            var g = "G";
-            var h = "H";
             
-            graph.AddVertex(a);
-            graph.AddVertex(b);
-            graph.AddVertex(c);
-            graph.AddVertex(d);
-            graph.AddVertex(e);
-            graph.AddVertex(f);
-            graph.AddVertex(g);
-            graph.AddVertex(h);
+            var a = graph.AddVertex("A");
+            var b = graph.AddVertex("B");
+            var c = graph.AddVertex("C");
+            var d = graph.AddVertex("D");
+            var e = graph.AddVertex("E");
+            var f = graph.AddVertex("F");
+            var g = graph.AddVertex("G");
+            var h = graph.AddVertex("H");
             
             graph.AddEdge(a, b, 2);
             graph.AddEdge(a, d, 4);
@@ -59,23 +50,14 @@ namespace DSTests.Graph
         {
             var graph = new WeightedDirectedGraph<string>();
 
-            var a = "A";
-            var b = "B";
-            var c = "C";
-            var d = "D";
-            var e = "E";
-            var f = "F";
-            var g = "G";
-            var h = "H";
-            
-            graph.AddVertex(a);
-            graph.AddVertex(b);
-            graph.AddVertex(c);
-            graph.AddVertex(d);
-            graph.AddVertex(e);
-            graph.AddVertex(f);
-            graph.AddVertex(g);
-            graph.AddVertex(h);
+            var a = graph.AddVertex("A");
+            var b = graph.AddVertex("B");
+            var c = graph.AddVertex("C");
+            var d = graph.AddVertex("D");
+            var e = graph.AddVertex("E");
+            var f = graph.AddVertex("F");
+            var g = graph.AddVertex("G");
+            var h = graph.AddVertex("H");
             
             graph.AddEdge(a, b, 2);
             graph.AddEdge(a, d, 4);
@@ -105,21 +87,13 @@ namespace DSTests.Graph
         {
             var graph = new WeightedDirectedGraph<string>();
 
-            var a = "A";
-            var b = "B";
-            var c = "C";
-            var d = "D";
-            var e = "E";
-            var f = "F";
-            var g = "G";
-            
-            graph.AddVertex(a);
-            graph.AddVertex(b);
-            graph.AddVertex(c);
-            graph.AddVertex(d);
-            graph.AddVertex(e);
-            graph.AddVertex(f);
-            graph.AddVertex(g);
+            var a = graph.AddVertex("A");
+            var b = graph.AddVertex("B");
+            var c = graph.AddVertex("C");
+            var d = graph.AddVertex("D");
+            var e = graph.AddVertex("E");
+            var f = graph.AddVertex("F");
+            var g = graph.AddVertex("G");
             
             graph.AddEdge(a, d, 1);
             graph.AddEdge(a, c, 2);
