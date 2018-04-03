@@ -34,6 +34,11 @@ namespace DataStructures.Graph.Edge
             return _edges.ContainsKey(source);
         }
 
+        public ICollection<T> Vertices()
+        {
+            return _edges.Keys;
+        }
+
         public void AddEdge(T source, T dest, int weight)
         {
             if (weight < 0)

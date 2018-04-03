@@ -78,6 +78,11 @@ namespace DataStructures.Queue
             _heap[hole] = placeholder;
         }
 
+        public bool IsEmpty()
+        {
+            return _size == 0;
+        }
+
         private int GetIndex(T val)
         {
             for (var i = 1; i <= _size; i++)

@@ -20,6 +20,7 @@ namespace DataStructures.Graph
         public void AddVertex(T source) { _edges.AddVertex(source); }
         public void RemoveVertex(T source) { _edges.RemoveVertex(source); }
         public bool ContainsVertex(T source) { return _edges.ContainsVertex(source); }
+        public ICollection<T> Vertices() { return _edges.Vertices(); }
 
         public void AddEdge(T source, T dest) { _edges.AddEdge(source, dest); }
         public void RemoveEdge(T source, T dest) { _edges.RemoveEdge(source, dest); }

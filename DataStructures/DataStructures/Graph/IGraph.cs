@@ -7,6 +7,7 @@ namespace DataStructures.Graph
         void AddVertex(T source);
         void RemoveVertex(T source);
         bool ContainsVertex(T source);
+        ICollection<T> Vertices();
         
         void AddEdge(T source, T dest);
         void RemoveEdge(T source, T dest);
