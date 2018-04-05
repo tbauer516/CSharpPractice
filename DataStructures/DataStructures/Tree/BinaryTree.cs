@@ -1,22 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 
 namespace DataStructures.Tree
 {
     public class BinaryTree<T> where T : IComparable<T>
     {
-        private BTNode<T> Root;
+        private BTNode<T> _root;
         public int Size { get; private set; }
 
         public BinaryTree()
         {
-            this.Root = null;
+            this._root = null;
         }
 
         public List<T> InOrder()
         {
-            return InOrder(this.Root, new List<T>());
+            return InOrder(this._root, new List<T>());
         }
 
         private List<T> InOrder(BTNode<T> current, List<T> ReturnList)
@@ -38,9 +39,9 @@ namespace DataStructures.Tree
 
         public void Insert(T val)
         {
-            if (this.Root == null)
+            if (this._root == null)
             {
-                this.Root = new BTNode<T>(val);
+                this._root = new BTNode<T>(val);
                 this.Size++;
                 return;
             }
@@ -54,6 +55,7 @@ namespace DataStructures.Tree
                 parent.Left = newNode;
             else
                 parent.Right = newNode;
+
             this.Size++;
         }
 
@@ -114,7 +116,7 @@ namespace DataStructures.Tree
 
             // set the parent's child
             if (isLeft == null)
-                this.Root = replace;
+                this._root = replace;
             else if ((bool) isLeft)
                 parent.Left = replace;
             else
@@ -130,6 +132,64 @@ namespace DataStructures.Tree
 
             // if we reach here, the remove was successful and we decrement the stored size
             this.Size--;
+        }
+
+        public int Height(T val)
+        {
+            var node = FindNode(val);
+
+            return node.Height;
+        }
+
+        public int Depth(T val)
+        {
+            var node = FindNode(val);
+
+            return node.Height;
+        }
+
+        private void UpdateNode(T val)
+        {
+            var node = FindNode(val);
+            node.Height = CalculateHeight(node);
+            node.Depth = CalculateDepth(node.Value);
+        }
+
+        private int CalculateDepth(T val)
+        {
+            var depth = 0;
+            var curr = this._root;
+            if (curr == null)
+                throw new ArgumentException("the tree is empty");
+
+            while (curr != null && !curr.Value.Equals(val))
+            {
+                depth++;
+                if (val.CompareTo(curr.Value) < 0)
+                    curr = curr.Left;
+                else
+                    curr = curr.Right;
+            }
+            
+            if (curr == null)
+                throw new ArgumentException("tree does not contain val: " + val.ToString());
+
+            return depth;
+        }
+
+        private int CalculateHeight(T val)
+        {
+            var node = FindNode(val);
+
+            return CalculateHeight(node);
+        }
+
+        private int CalculateHeight(BTNode<T> node)
+        {
+            if (node == null)
+                return -1;
+            
+            return Math.Max(CalculateHeight(node.Left), CalculateHeight(node.Right));
         }
 
         // returns:
@@ -157,7 +217,7 @@ namespace DataStructures.Tree
         // **NOTE: does not provide info on whether the value exists or not
         private BTNode<T> FindParent(T val)
         {
-            var current = this.Root;
+            var current = this._root;
             while (current != null)
             {
                 BTNode<T> nextChild = null;
@@ -175,14 +235,42 @@ namespace DataStructures.Tree
 
                 current = nextChild;
             }
-            return null;
+            
+            throw new ArgumentException("the tree contains no nodes");
         }
 
-        public class BTNode<T> where T : IComparable<T>
+        // returns the node we are looking for
+        // returns:
+        //    null:    when Root is null
+        //    null:    when the node is not found
+        //    BTNode:  when the node is found
+        private BTNode<T> FindNode(T val)
+        {
+            var parent = FindParent(val);
+            if (parent == null)
+                return null;
+
+            BTNode<T> child = null;
+            if (parent.Value.Equals(val))
+                child = parent;
+            else if (parent.Left != null && parent.Left.Value.Equals(val))
+                child = parent.Left;
+            else if (parent.Right != null && parent.Right.Value.Equals(val))
+                child = parent.Right;
+
+            if (child == null)
+                throw new ArgumentException("the tree does not contain the node: " + val.ToString());
+
+            return child;
+        }
+
+        protected class BTNode<T> where T : IComparable<T>
         {
             public T Value { get; set; }
             public BTNode<T> Left { get; set; }
             public BTNode<T> Right { get; set; }
+            public int Height { get; set; }
+            public int Depth { get; set; }
 
             public BTNode(T val)
             {

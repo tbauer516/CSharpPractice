@@ -71,16 +71,101 @@ namespace DSTests.Tree
             Assert.AreEqual(0, twoSize);
             Assert.AreEqual(false, fourContainsAfterRemove);
         }
-
+        
         [Test]
-        public void TestRemove()
+        public void TestRemove1()
         {
             var testTree = SetupTree();
             var initialSize = testTree.Size;
+            var toRemove = 1;
 
-            testTree.Remove(3);
+            testTree.Remove(toRemove);
             var newSize = testTree.Size;
-            var newContains = testTree.Contains(3);
+            var newContains = testTree.Contains(toRemove);
+            Assert.AreEqual(initialSize - 1, newSize);
+            Assert.AreEqual(false, newContains);
+        }
+        
+        [Test]
+        public void TestRemove2()
+        {
+            var testTree = SetupTree();
+            var initialSize = testTree.Size;
+            var toRemove = 2;
+
+            testTree.Remove(toRemove);
+            var newSize = testTree.Size;
+            var newContains = testTree.Contains(toRemove);
+            Assert.AreEqual(initialSize - 1, newSize);
+            Assert.AreEqual(false, newContains);
+        }
+
+        [Test]
+        public void TestRemove3()
+        {
+            var testTree = SetupTree();
+            var initialSize = testTree.Size;
+            var toRemove = 3;
+
+            testTree.Remove(toRemove);
+            var newSize = testTree.Size;
+            var newContains = testTree.Contains(toRemove);
+            Assert.AreEqual(initialSize - 1, newSize);
+            Assert.AreEqual(false, newContains);
+        }
+        
+        [Test]
+        public void TestRemove4()
+        {
+            var testTree = SetupTree();
+            var initialSize = testTree.Size;
+            var toRemove = 4;
+
+            testTree.Remove(toRemove);
+            var newSize = testTree.Size;
+            var newContains = testTree.Contains(toRemove);
+            Assert.AreEqual(initialSize - 1, newSize);
+            Assert.AreEqual(false, newContains);
+        }
+        
+        [Test]
+        public void TestRemove5()
+        {
+            var testTree = SetupTree();
+            var initialSize = testTree.Size;
+            var toRemove = 5;
+
+            testTree.Remove(toRemove);
+            var newSize = testTree.Size;
+            var newContains = testTree.Contains(toRemove);
+            Assert.AreEqual(initialSize - 1, newSize);
+            Assert.AreEqual(false, newContains);
+        }
+        
+        [Test]
+        public void TestRemove6()
+        {
+            var testTree = SetupTree();
+            var initialSize = testTree.Size;
+            var toRemove = 6;
+
+            testTree.Remove(toRemove);
+            var newSize = testTree.Size;
+            var newContains = testTree.Contains(toRemove);
+            Assert.AreEqual(initialSize - 1, newSize);
+            Assert.AreEqual(false, newContains);
+        }
+        
+        [Test]
+        public void TestRemove7()
+        {
+            var testTree = SetupTree();
+            var initialSize = testTree.Size;
+            var toRemove = 7;
+
+            testTree.Remove(toRemove);
+            var newSize = testTree.Size;
+            var newContains = testTree.Contains(toRemove);
             Assert.AreEqual(initialSize - 1, newSize);
             Assert.AreEqual(false, newContains);
         }
