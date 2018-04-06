@@ -34,7 +34,7 @@ namespace DataStructures.Tree
         public bool Contains(T val)
         {
             var parent = FindParent(val);
-            return parent != null && ( parent.Value.Equals(val) || parent.HasChild(val) );
+            return parent != null && (parent.Value.Equals(val) || parent.HasChild(val));
         }
 
         public void Insert(T val)
@@ -136,23 +136,12 @@ namespace DataStructures.Tree
 
         public int Height(T val)
         {
-            var node = FindNode(val);
-
-            return node.Height;
+            return CalculateHeight(val);
         }
 
         public int Depth(T val)
         {
-            var node = FindNode(val);
-
-            return node.Height;
-        }
-
-        private void UpdateNode(T val)
-        {
-            var node = FindNode(val);
-            node.Height = CalculateHeight(node);
-            node.Depth = CalculateDepth(node.Value);
+            return CalculateDepth(val);
         }
 
         private int CalculateDepth(T val)
@@ -180,6 +169,9 @@ namespace DataStructures.Tree
         private int CalculateHeight(T val)
         {
             var node = FindNode(val);
+            
+            if (node == null)
+                throw new ArgumentException("tree does not contain val: " + val.ToString());
 
             return CalculateHeight(node);
         }
@@ -188,16 +180,16 @@ namespace DataStructures.Tree
         {
             if (node == null)
                 return -1;
-            
-            return Math.Max(CalculateHeight(node.Left), CalculateHeight(node.Right));
+
+            return 1 + Math.Max(CalculateHeight(node.Left), CalculateHeight(node.Right));
         }
 
-        // returns:
-        //  null:   search is null
-        //  search: when search has no left children
-        //  BTNode: furthest left child of search otherwise
         private BTNode<T> FindSmallestParent(BTNode<T> search)
         {
+            // returns:
+            //  null:   search is null
+            //  search: when search has no left children
+            //  BTNode: furthest left child of search otherwise
             var current = search;
             while (current != null && current.Left != null)
             {
@@ -209,14 +201,14 @@ namespace DataStructures.Tree
             return current;
         }
 
-        // returns the parent of the node of the value being searched for
-        // returns:
-        //      null:   when Root is null
-        //      Root:   when the value searched is the Root
-        //      BTNode: when parent where child is found OR would be found if it existed
-        // **NOTE: does not provide info on whether the value exists or not
         private BTNode<T> FindParent(T val)
         {
+            // returns the parent of the node of the value being searched for
+            // returns:
+            //      null:   when Root is null
+            //      Root:   when the value searched is the Root
+            //      BTNode: when parent where child is found OR would be found if it existed
+            // **NOTE: does not provide info on whether the value exists or not
             var current = this._root;
             while (current != null)
             {
@@ -235,17 +227,17 @@ namespace DataStructures.Tree
 
                 current = nextChild;
             }
-            
-            throw new ArgumentException("the tree contains no nodes");
+
+            return null;
         }
 
-        // returns the node we are looking for
-        // returns:
-        //    null:    when Root is null
-        //    null:    when the node is not found
-        //    BTNode:  when the node is found
         private BTNode<T> FindNode(T val)
         {
+            // returns the node we are looking for
+            // returns:
+            //    null:    when Root is null
+            //    null:    when the node is not found
+            //    BTNode:  when the node is found
             var parent = FindParent(val);
             if (parent == null)
                 return null;
@@ -258,9 +250,6 @@ namespace DataStructures.Tree
             else if (parent.Right != null && parent.Right.Value.Equals(val))
                 child = parent.Right;
 
-            if (child == null)
-                throw new ArgumentException("the tree does not contain the node: " + val.ToString());
-
             return child;
         }
 
@@ -269,8 +258,6 @@ namespace DataStructures.Tree
             public T Value { get; set; }
             public BTNode<T> Left { get; set; }
             public BTNode<T> Right { get; set; }
-            public int Height { get; set; }
-            public int Depth { get; set; }
 
             public BTNode(T val)
             {
