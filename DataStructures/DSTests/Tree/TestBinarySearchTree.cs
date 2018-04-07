@@ -6,12 +6,12 @@ using System;
 namespace DSTests.Tree
 {
     [TestFixture]
-    class TestBinaryTree
+    class TestBinarySearchTree
     {
 
-        private BinaryTree<int> SetupTree()
+        private BinarySearchTree<int> SetupTree()
         {
-            var testTree = new BinaryTree<int>();
+            var testTree = new BinarySearchTree<int>();
             testTree.Insert(4);
             testTree.Insert(3);
             testTree.Insert(1);
@@ -25,7 +25,7 @@ namespace DSTests.Tree
         [Test]
         public void TestInsert()
         {
-            var testTree = new BinaryTree<int>();
+            var testTree = new BinarySearchTree<int>();
             var initialSize = testTree.Size;
             Assert.AreEqual(0, initialSize);
 
@@ -41,7 +41,7 @@ namespace DSTests.Tree
         [Test]
         public void TestContains()
         {
-            var testTree = new BinaryTree<int>();
+            var testTree = new BinarySearchTree<int>();
             var hasOne = testTree.Contains(1);
             Assert.AreEqual(false, hasOne);
 
@@ -53,7 +53,7 @@ namespace DSTests.Tree
         [Test]
         public void TestRemoveRoot()
         {
-            var testTree = new BinaryTree<int>();
+            var testTree = new BinarySearchTree<int>();
             var initialSize = testTree.Size;
             var initialContains = testTree.Contains(4);
             Assert.AreEqual(0, initialSize);
@@ -168,48 +168,6 @@ namespace DSTests.Tree
             var newContains = testTree.Contains(toRemove);
             Assert.AreEqual(initialSize - 1, newSize);
             Assert.AreEqual(false, newContains);
-        }
-
-        [Test]
-        public void TestHeight()
-        {
-            var tree = new BinaryTree<int>();
-
-            var one = 1;
-            var two = 2;
-            var three = 3;
-            var four = 4;
-            
-            tree.Insert(two);
-            tree.Insert(one);
-            tree.Insert(three);
-            tree.Insert(four);
-
-            var expected = 1;
-            var actual = tree.Height(three);
-            
-            Assert.AreEqual(expected, actual);
-        }
-
-        [Test]
-        public void TestDepth()
-        {
-            var tree = new BinaryTree<int>();
-
-            var one = 1;
-            var two = 2;
-            var three = 3;
-            var four = 4;
-            
-            tree.Insert(two);
-            tree.Insert(one);
-            tree.Insert(three);
-            tree.Insert(four);
-
-            var expected = 1;
-            var actual = tree.Depth(three);
-            
-            Assert.AreEqual(expected, actual);
         }
 
         [Test]
