@@ -3,20 +3,19 @@ using System.Collections.Generic;
 
 namespace DataStructures.Graph.Edge
 {
-    // TODO: change linked lists to lists
     public class WeightedEdgeList<T> : IEdgeStructure<T>
     {
-        private readonly Dictionary<T, LinkedList<Tuple<T, int>>> _edges;
+        private readonly Dictionary<T, List<Tuple<T, int>>> _edges;
 
         public WeightedEdgeList()
         {    
-            _edges = new Dictionary<T, LinkedList<Tuple<T, int>>>();
+            _edges = new Dictionary<T, List<Tuple<T, int>>>();
         }
 
         public void AddVertex(T source)
         {
             if (!_edges.ContainsKey(source))
-                _edges.Add(source, new LinkedList<Tuple<T, int>>());
+                _edges.Add(source, new List<Tuple<T, int>>());
         }
 
         public void RemoveVertex(T source)
@@ -54,7 +53,7 @@ namespace DataStructures.Graph.Edge
                 if (tup.Item1.Equals(dest))
                     return;
             
-            adjacencyList.AddLast(new Tuple<T, int>(dest, weight));
+            adjacencyList.Add(new Tuple<T, int>(dest, weight));
         }
 
         public void AddEdge(T source, T dest)
