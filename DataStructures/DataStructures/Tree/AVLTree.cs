@@ -3,31 +3,14 @@ using System.Collections.Generic;
 
 namespace DataStructures.Tree
 {
-    public class AVLTree<T> : BinaryTree<T> where T : IComparable<T>
+    public class AVLTree<T> : BinarySearchTree<T> where T : IComparable<T>
     {
         public override T Insert(T val)
         {
             var newNode = new AVLNode<T>(val);
+            base.Insert(newNode);
             
-            if (Root == null)
-            {
-                Root = newNode;
-                Size++;
-                return val;
-            }
-
-            var parent = (AVLNode<T>) FindParent(val);
-            if (parent.HasChild(val))
-                return val;
-
-            if (val.CompareTo(parent.Value) < 0)
-                parent.Left = newNode;
-            else
-                parent.Right = newNode;
-
-            Size++;
-            
-            CorrectHeight(parent);
+            CorrectHeight(newNode);
             
             return val;
         }

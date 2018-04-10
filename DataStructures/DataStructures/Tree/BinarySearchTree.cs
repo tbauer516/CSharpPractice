@@ -6,26 +6,34 @@ namespace DataStructures.Tree
     {
         public override T Insert(T val)
         {
-            var newNode = new BTNode<T>(val);
-            
+            Insert(new BTNode<T>(val));
+            return val;
+        }
+
+        protected override void Insert(BTNode<T> node)
+        {
+            if (node == null)
+                throw new ArgumentException("the node to insert cannot be null");
+
             if (Root == null)
             {
-                Root = newNode;
+                Root = node;
                 Size++;
-                return val;
+                return;
             }
+
+            var val = node.Value;
 
             var parent = FindParent(val);
             if (parent.HasChild(val))
-                return val;
+                return;
 
             if (val.CompareTo(parent.Value) < 0)
-                parent.Left = newNode;
+                parent.Left = node;
             else
-                parent.Right = newNode;
+                parent.Right = node;
 
             Size++;
-            return val;
         }
 
         public override T Remove(T val)

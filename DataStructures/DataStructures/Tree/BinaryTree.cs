@@ -16,6 +16,7 @@ namespace DataStructures.Tree
         }
 
         public abstract T Insert(T val);
+        protected abstract void Insert(BTNode<T> node);
 
         public abstract T Remove(T val);
         
