@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace DataStructures.Graph.Edge
 {
+    // TODO: change linked lists to lists
     public class WeightedEdgeList<T> : IEdgeStructure<T>
     {
         private readonly Dictionary<T, LinkedList<Tuple<T, int>>> _edges;

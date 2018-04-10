@@ -3,6 +3,7 @@ using DataStructures.Graph.Vertex;
 
 namespace DataStructures.Graph.Search
 {
+    // TODO: change linkedlists to lists
     public static class BreadthFirstSearch<T>
     {
         public static ICollection<T> Search(IGraph<T> graph, T source, T dest)

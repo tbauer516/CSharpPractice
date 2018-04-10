@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 
 namespace DataStructures.Tree
 {
@@ -37,6 +38,22 @@ namespace DataStructures.Tree
             InOrder(current.Left, returnList);
             returnList.Add(current.Value);
             InOrder(current.Right, returnList);
+            return returnList;
+        }
+
+        public List<T> PreOrder()
+        {
+            return PreOrder(Root, new List<T>());
+        }
+
+        private List<T> PreOrder(BTNode<T> current, List<T> returnList)
+        {
+            if (current == null)
+                return returnList;
+
+            returnList.Add(current.Value);
+            PreOrder(current.Left, returnList);
+            PreOrder(current.Right, returnList);
             return returnList;
         }
 
