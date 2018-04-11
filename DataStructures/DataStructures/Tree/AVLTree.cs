@@ -22,17 +22,11 @@ namespace DataStructures.Tree
                 throw new ArgumentException("val of " + val.ToString() + " does not exist");
 
             if (parent.Value.Equals(val))
-            {
                 Root = RemoveNode(parent);
-            }
             else if (parent.Left != null && parent.Left.Value.Equals(val))
-            {
                 parent.Left = RemoveNode((AVLNode<T>) parent.Left);
-            }
             else if (parent.Right != null && parent.Right.Value.Equals(val))
-            {
                 parent.Right = RemoveNode((AVLNode<T>) parent.Right);
-            }
 
             Size--;
             
