@@ -5,6 +5,11 @@ namespace DataStructures.Tree
 {
     public class RedBlackTree<T> : BinarySearchTree<T> where T : IComparable<T>
     {
+        // 1) The root is black
+        // 2) All leaves are black
+        // 3) Every red node must have two black child nodes
+        // 4) Every path from a given node to any of its descendant leaves must contain an equal number of black nodes
+
         public override T Insert(T val)
         {
             throw new NotImplementedException();
@@ -21,7 +26,7 @@ namespace DataStructures.Tree
             
             public RedBlackNode(T val) : base(val)
             {
-                Black = true;
+                Black = false;
             }
         }
     }
