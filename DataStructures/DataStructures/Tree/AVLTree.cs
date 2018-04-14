@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace DataStructures.Tree
 {
-    public class AVLTree<T> : BinarySearchTree<T> where T : IComparable<T>
+    public class AVLTree<T> : SelfBalancingBinarySearchTree<T> where T : IComparable<T>
     {
         public override T Insert(T val)
         {
@@ -44,103 +44,49 @@ namespace DataStructures.Tree
                 return null;
 
             if (left == null || right.Height > left.Height)
-                return RemoveFromRight(node);
+                return (AVLNode<T>) RemoveFromRight(node);
 
-            return RemoveFromLeft(node);
+            return (AVLNode<T>) RemoveFromLeft(node);
         }
 
-        private AVLNode<T> RemoveFromLeft(AVLNode<T> node)
+        protected override BTNode<T> RemoveFromLeft(BTNode<T> node)
         {
             // Assumption: we know that node.Left is not null from the RemoveNode() method
-            
-            var leftChild = node.Left;
-            var largestP = base.FindSmallestParent(leftChild);
-            var largest = largestP.Right;
-            var replacement = largest;
+            var replacement = base.RemoveFromLeft(node);
 
-            if (largest != null)
-            {
-                largestP.Right = largest.Left;
-                largest.Left = leftChild;
-            }
-            else
-            {
-                replacement = leftChild;
-            }
+            CorrectHeight((AVLNode<T>) replacement.Left, (AVLNode<T>) replacement);
 
-            replacement.Right = node.Right;
-            
-            CorrectHeight((AVLNode<T>) replacement, (AVLNode<T>) largestP);
-
-            return (AVLNode<T>) replacement;
+            return replacement;
         }
 
-        private AVLNode<T> RemoveFromRight(AVLNode<T> node)
+        protected override BTNode<T> RemoveFromRight(BTNode<T> node)
         {
-            // Assumption: we know that node.Right is not null  from the RemoveNode() method
-            
-            var rightChild = node.Right;
-            var smallestP = base.FindSmallestParent(rightChild);
-            var smallest = smallestP.Left;
-            var replacement = smallest;
+            // Assumption: we know that node.Right is not null from the RemoveNode() method
+            var replacement = base.RemoveFromRight(node);
 
-            if (smallest != null)
-            {
-                smallestP.Left = smallest.Right;
-                smallest.Right = rightChild;
-            }
-            else
-            {
-                replacement = rightChild;
-            }
+            CorrectHeight((AVLNode<T>) replacement.Right, (AVLNode<T>) replacement);
 
-            replacement.Left = node.Left;
-            
-            CorrectHeight((AVLNode<T>) replacement, (AVLNode<T>) smallestP);
-
-            return (AVLNode<T>) replacement;
+            return replacement;
         }
 
-        private AVLNode<T> RotateRight(AVLNode<T> node, bool recurse = true)
+        protected override BTNode<T> RotateRight(BTNode<T> node)
         {
-            // returns:
-            //    node:        when a rotation is not possible
-            //    newParent:   when the rotation is complete
+            var newRoot = base.RotateRight(node);
 
-            var left = (AVLNode<T>) node.Left;
+            ((AVLNode<T>) newRoot.Right).Height = CalculateHeight((AVLNode<T>) newRoot.Right);
+            ((AVLNode<T>) newRoot).Height = CalculateHeight((AVLNode<T>) newRoot);
 
-            if (left == null)
-                return node;
-            
-            var tempChild = left.Right;
-            left.Right = node;
-            node.Left = tempChild;
-
-            node.Height = CalculateHeight(node);
-            left.Height = CalculateHeight(left);
-            
-            return left;
+            return newRoot;
         }
-        
-        private AVLNode<T> RotateLeft(AVLNode<T> node, bool recurse = true)
+
+        protected override BTNode<T> RotateLeft(BTNode<T> node)
         {
-            // returns:
-            //    node:        when a rotation is not possible
-            //    newParent:   when the rotation is complete
+            var newRoot = base.RotateLeft(node);
 
-            var right = (AVLNode<T>) node.Right;
+            ((AVLNode<T>)newRoot.Left).Height = CalculateHeight((AVLNode<T>)newRoot.Left);
+            ((AVLNode<T>)newRoot).Height = CalculateHeight((AVLNode<T>)newRoot);
 
-            if (right == null)
-                return node;
-
-            var tempChild = right.Left;
-            right.Left = node;
-            node.Right = tempChild;
-
-            node.Height = CalculateHeight(node);
-            right.Height = CalculateHeight(right);
-            
-            return right;
+            return newRoot;
         }
 
         private AVLNode<T> CheckRotation(AVLNode<T> node)
@@ -152,7 +98,7 @@ namespace DataStructures.Tree
                 var leftBal = CalculateBalance(left);
                 if (leftBal > 0)
                     node.Left = RotateLeft(left);
-                return RotateRight(node);
+                return (AVLNode<T>) RotateRight(node);
             }
             else if (bal > 1)
             {
@@ -160,35 +106,10 @@ namespace DataStructures.Tree
                 var rightBal = CalculateBalance(right);
                 if (rightBal < 0)
                     node.Right = RotateRight(right);
-                return RotateLeft(node);
+                return (AVLNode<T>) RotateLeft(node);
             }
 
             return node;
-        }
-
-        private Stack<AVLNode<T>> GetParentChain(AVLNode<T> node)
-        {
-            return GetParentChain((AVLNode<T>) Root, node);
-        }
-
-        private Stack<AVLNode<T>> GetParentChain(AVLNode<T> parent, AVLNode<T> child)
-        {
-            var chain = new Stack<AVLNode<T>>();
-            var current = parent;
-
-            while (current != null && !current.Value.Equals(child.Value))
-            {
-                chain.Push(current);
-
-                if (child.Value.CompareTo(current.Value) < 0)
-                    current = (AVLNode<T>) current.Left;
-                else if (child.Value.CompareTo(current.Value) > 0)
-                    current = (AVLNode<T>) current.Right;
-                else
-                    break;
-            }
-
-            return chain;
         }
 
         private void CorrectHeight(AVLNode<T> node)
@@ -201,12 +122,12 @@ namespace DataStructures.Tree
             if (top == null || bottom == null)
                 return;
             
-            var parentChain = GetParentChain(top, bottom);
+            var parentChain = base.GetParentChain(top, bottom);
             parentChain.Push(bottom);
 
             while (parentChain.Count > 0)
             {
-                var parent = parentChain.Pop();
+                var parent = (AVLNode<T>) parentChain.Pop();
 
                 if (parent.Left != null)
                     parent.Left = CheckRotation((AVLNode<T>) parent.Left);

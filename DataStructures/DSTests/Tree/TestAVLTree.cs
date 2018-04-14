@@ -216,7 +216,7 @@ namespace DSTests.Tree
         }
 
         [Test]
-        public void TestRemoveBalanced()
+        public void TestRemoveBalanced1()
         {
             var testTree = new AVLTree<int>();
             testTree.Insert(5);
@@ -233,6 +233,72 @@ namespace DSTests.Tree
 
             var expected = new int[] { 3, 2, 1, 5, 4, 10 };
             
+            Assert.AreEqual(expected, actual);
+        }
+
+        [Test]
+        public void TestRemoveBalanced2()
+        {
+            var testTree = new AVLTree<int>();
+            testTree.Insert(1);
+            testTree.Insert(9);
+            testTree.Insert(8);
+
+            var actual1 = testTree.PreOrder();
+            var expected1 = new int[] { 8, 1, 9 };
+            Assert.AreEqual(expected1, actual1);
+
+            testTree.Insert(2);
+            testTree.Remove(9);
+
+            var actual2 = testTree.PreOrder();
+            var expected2 = new int[] { 2, 1, 8 };
+            Assert.AreEqual(expected2, actual2);
+        }
+
+        [Test]
+        public void TestRemoveBalanced3()
+        {
+            var testTree = new AVLTree<int>();
+            testTree.Insert(10);
+            testTree.Insert(5);
+            testTree.Insert(15);
+            testTree.Insert(2);
+            testTree.Insert(7);
+            testTree.Insert(12);
+            testTree.Insert(17);
+            testTree.Insert(11);
+            testTree.Insert(13);
+
+            testTree.Remove(17);
+
+            var actual = testTree.PreOrder();
+            var expected = new int[] { 10, 5, 2, 7, 12, 11, 15, 13 };
+            Assert.AreEqual(expected, actual);
+        }
+
+        [Test]
+        public void TestRemoveBalanced4()
+        {
+            var testTree = new AVLTree<int>();
+            testTree.Insert(10);
+            testTree.Insert(5);
+            testTree.Insert(15);
+            testTree.Insert(2);
+            testTree.Insert(7);
+            testTree.Insert(12);
+            testTree.Insert(17);
+            testTree.Insert(1);
+            testTree.Insert(8);
+            testTree.Insert(11);
+            testTree.Insert(16);
+            testTree.Insert(18);
+            testTree.Insert(19);
+
+            testTree.Remove(10);
+
+            var actual = testTree.PreOrder();
+            var expected = new int[] { 11, 5, 2, 1, 7, 8, 17, 15, 12, 16, 18, 19 };
             Assert.AreEqual(expected, actual);
         }
 
