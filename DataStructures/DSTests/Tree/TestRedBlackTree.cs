@@ -5,11 +5,11 @@ using System.Collections.Generic;
 namespace DSTests.Tree
 {
     [TestFixture]
-    class TestAVLTree
+    class TestRedBlackTree
     {
-        private AVLTree<int> SetupTree()
+        private RedBlackTree<int> SetupTree()
         {
-            var testTree = new AVLTree<int>();
+            var testTree = new RedBlackTree<int>();
             testTree.Insert(4);
             testTree.Insert(3);
             testTree.Insert(1);
@@ -19,11 +19,11 @@ namespace DSTests.Tree
             testTree.Insert(7);
             return testTree;
         }
-        
+
         [Test]
         public void TestInsert()
         {
-            var testTree = new AVLTree<int>();
+            var testTree = new RedBlackTree<int>();
             var initialSize = testTree.Size;
             Assert.AreEqual(0, initialSize);
 
@@ -39,21 +39,21 @@ namespace DSTests.Tree
         [Test]
         public void TestInsertBalanced1()
         {
-            var testTree = new AVLTree<int>();
+            var testTree = new RedBlackTree<int>();
             testTree.Insert(1);
             testTree.Insert(2);
             testTree.Insert(3);
 
             var actual = testTree.PreOrder();
 
-            var expected = new int[] {2, 1, 3};
+            var expected = new int[] { 2, 1, 3 };
             Assert.AreEqual(expected, actual);
         }
 
         [Test]
         public void TestInsertBalanced2()
         {
-            var testTree = new AVLTree<int>();
+            var testTree = new RedBlackTree<int>();
             testTree.Insert(1);
             testTree.Insert(2);
             testTree.Insert(3);
@@ -65,11 +65,11 @@ namespace DSTests.Tree
             var expected = new int[] { 2, 1, 4, 3, 5 };
             Assert.AreEqual(expected, actual);
         }
-        
+
         [Test]
         public void TestInsertBalanced3()
         {
-            var testTree = new AVLTree<int>();
+            var testTree = new RedBlackTree<int>();
             testTree.Insert(5);
             testTree.Insert(4);
             testTree.Insert(1);
@@ -85,7 +85,7 @@ namespace DSTests.Tree
         [Test]
         public void TestContains()
         {
-            var testTree = new AVLTree<int>();
+            var testTree = new RedBlackTree<int>();
             var hasOne = testTree.Contains(1);
             Assert.AreEqual(false, hasOne);
 
@@ -97,7 +97,7 @@ namespace DSTests.Tree
         [Test]
         public void TestRemoveRoot()
         {
-            var testTree = new AVLTree<int>();
+            var testTree = new RedBlackTree<int>();
             var initialSize = testTree.Size;
             var initialContains = testTree.Contains(4);
             Assert.AreEqual(0, initialSize);
@@ -115,7 +115,7 @@ namespace DSTests.Tree
             Assert.AreEqual(0, twoSize);
             Assert.AreEqual(false, fourContainsAfterRemove);
         }
-        
+
         [Test]
         public void TestRemove1()
         {
@@ -129,7 +129,7 @@ namespace DSTests.Tree
             Assert.AreEqual(initialSize - 1, newSize);
             Assert.AreEqual(false, newContains);
         }
-        
+
         [Test]
         public void TestRemove2()
         {
@@ -157,7 +157,7 @@ namespace DSTests.Tree
             Assert.AreEqual(initialSize - 1, newSize);
             Assert.AreEqual(false, newContains);
         }
-        
+
         [Test]
         public void TestRemove4()
         {
@@ -171,7 +171,7 @@ namespace DSTests.Tree
             Assert.AreEqual(initialSize - 1, newSize);
             Assert.AreEqual(false, newContains);
         }
-        
+
         [Test]
         public void TestRemove5()
         {
@@ -185,7 +185,7 @@ namespace DSTests.Tree
             Assert.AreEqual(initialSize - 1, newSize);
             Assert.AreEqual(false, newContains);
         }
-        
+
         [Test]
         public void TestRemove6()
         {
@@ -199,7 +199,7 @@ namespace DSTests.Tree
             Assert.AreEqual(initialSize - 1, newSize);
             Assert.AreEqual(false, newContains);
         }
-        
+
         [Test]
         public void TestRemove7()
         {
@@ -217,7 +217,7 @@ namespace DSTests.Tree
         [Test]
         public void TestRemoveBalanced1()
         {
-            var testTree = new AVLTree<int>();
+            var testTree = new RedBlackTree<int>();
             testTree.Insert(5);
             testTree.Insert(9);
             testTree.Insert(2);
@@ -230,15 +230,15 @@ namespace DSTests.Tree
 
             var actual = testTree.PreOrder();
 
-            var expected = new int[] { 3, 2, 1, 5, 4, 10 };
-            
+            var expected = new int[] { 5, 2, 1, 3, 4, 10 };
+
             Assert.AreEqual(expected, actual);
         }
 
         [Test]
         public void TestRemoveBalanced2()
         {
-            var testTree = new AVLTree<int>();
+            var testTree = new RedBlackTree<int>();
             testTree.Insert(1);
             testTree.Insert(9);
             testTree.Insert(8);
@@ -258,7 +258,7 @@ namespace DSTests.Tree
         [Test]
         public void TestRemoveBalanced3()
         {
-            var testTree = new AVLTree<int>();
+            var testTree = new RedBlackTree<int>();
             testTree.Insert(10);
             testTree.Insert(5);
             testTree.Insert(15);
@@ -276,30 +276,30 @@ namespace DSTests.Tree
             Assert.AreEqual(expected, actual);
         }
 
-        [Test]
-        public void TestRemoveBalanced4()
-        {
-            var testTree = new AVLTree<int>();
-            testTree.Insert(10);
-            testTree.Insert(5);
-            testTree.Insert(15);
-            testTree.Insert(2);
-            testTree.Insert(7);
-            testTree.Insert(12);
-            testTree.Insert(17);
-            testTree.Insert(1);
-            testTree.Insert(8);
-            testTree.Insert(11);
-            testTree.Insert(16);
-            testTree.Insert(18);
-            testTree.Insert(19);
+        //[Test]
+        //public void TestRemoveBalanced4()
+        //{
+        //    var testTree = new RedBlackTree<int>();
+        //    testTree.Insert(10);
+        //    testTree.Insert(5);
+        //    testTree.Insert(15);
+        //    testTree.Insert(2);
+        //    testTree.Insert(7);
+        //    testTree.Insert(12);
+        //    testTree.Insert(17);
+        //    testTree.Insert(1);
+        //    testTree.Insert(8);
+        //    testTree.Insert(11);
+        //    testTree.Insert(16);
+        //    testTree.Insert(18);
+        //    testTree.Insert(19);
 
-            testTree.Remove(10);
+        //    testTree.Remove(10);
 
-            var actual = testTree.PreOrder();
-            var expected = new int[] { 11, 5, 2, 1, 7, 8, 17, 15, 12, 16, 18, 19 };
-            Assert.AreEqual(expected, actual);
-        }
+        //    var actual = testTree.PreOrder();
+        //    var expected = new int[] { 11, 5, 2, 1, 7, 8, 17, 15, 12, 16, 18, 19 };
+        //    Assert.AreEqual(expected, actual);
+        //}
 
         [Test]
         public void TestInOrder()
