@@ -10,6 +10,8 @@ namespace DataStructures.Tree
         // 3) Every red node must have two black child nodes
         // 4) Every path from a given node to any of its descendant leaves must contain an equal number of black nodes
 
+        protected enum NodeColors { Black, Red };
+        
         public override T Insert(T val)
         {
             throw new NotImplementedException();
@@ -22,11 +24,13 @@ namespace DataStructures.Tree
         
         protected class RedBlackNode<T> : BTNode<T> where T : IComparable<T>
         {
-            public bool Black { get; set; }
+            public NodeColors Color { get; set; }
+            public int BlackHeight { get; set; }
             
             public RedBlackNode(T val) : base(val)
             {
-                Black = false;
+                Color = NodeColors.Red;
+                BlackHeight = 0;
             }
         }
     }
