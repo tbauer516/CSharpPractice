@@ -5,12 +5,30 @@ namespace DataStructures.Tree
 {
     public class RedBlackTree<T> : BinarySearchTree<T> where T : IComparable<T>
     {
+        protected enum NodeColors { Black, Red };
+
         // 1) The root is black
         // 2) All leaves are black
         // 3) Every red node must have two black child nodes
         // 4) Every path from a given node to any of its descendant leaves must contain an equal number of black nodes
 
-        protected enum NodeColors { Black, Red };
+        private void CheckNode(RedBlackNode<T> node)
+        {
+            RedBlackNode<T> left = (RedBlackNode<T>) node.Left;
+            RedBlackNode<T> right = (RedBlackNode<T>) node.Right;
+            if (left.BlackHeight != right.BlackHeight)
+            {
+                // rotate
+                // make left node red and checknode
+                // make right node red and checknode
+            }
+
+            if (node.Color.Equals(NodeColors.Red))
+            {
+                if (node.Equals(this.Root) || left.Color.Equals(NodeColors.Red) || right.Color.Equals(NodeColors.Red))
+                    node.Color = NodeColors.Black;
+            }
+        }
         
         public override T Insert(T val)
         {
